@@ -6,4 +6,11 @@
 //  Copyright © 2024 matthewzierl.org. All rights reserved.
 //
 
-import Foundation
+import SwiftUI
+
+struct ImageFeed: View {
+    
+    var body: some View {
+        Text("HELLO")
+    }
+}

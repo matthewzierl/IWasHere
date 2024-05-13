@@ -11,7 +11,10 @@ import SwiftUI
  Conforms UIKit view to SwiftUI view
  */
 struct myView: UIViewControllerRepresentable {
-    typealias UIViewControllerType = ViewController
+    
+    typealias UIViewControllerType = myViewController
+    
+    let views: [UIViewController] // array of UIViewController types to display with ViewController
     
     /*
      Create view controller object
@@ -19,8 +22,8 @@ struct myView: UIViewControllerRepresentable {
      
      return: instance of ViewController
      */
-    func makeUIViewController(context: Context) -> ViewController {
-        let vc = ViewController()
+    func makeUIViewController(context: Context) -> myViewController {
+        let vc = myViewController()
         // configurations (if needed) here
         
         return vc
@@ -30,16 +33,18 @@ struct myView: UIViewControllerRepresentable {
      Called when there is an update from SwiftUI
      
      */
-    func updateUIViewController(_ uiViewController: ViewController, context: Context) {
+    func updateUIViewController(_ uiViewController: myViewController, context: Context) {
         return
     }
 }
 
 struct ContentView: View {
+    
     var body: some View {
         myView()
     }
 }
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

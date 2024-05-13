@@ -13,6 +13,7 @@
 		B5BF87AC2BF0846A009FCE41 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5BF87AB2BF0846A009FCE41 /* Preview Assets.xcassets */; };
 		B5FC298D2BF0C0E40094A8A4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5FC298C2BF0C0E40094A8A4 /* LaunchScreen.storyboard */; };
 		B5FC298F2BF0C7E10094A8A4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FC298E2BF0C7E10094A8A4 /* ViewController.swift */; };
+		B5FC29922BF1194B0094A8A4 /* ImageFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FC29912BF1194B0094A8A4 /* ImageFeed.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		B5FC298C2BF0C0E40094A8A4 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B5FC298E2BF0C7E10094A8A4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B5FC29902BF0C9750094A8A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		B5FC29912BF1194B0094A8A4 /* ImageFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFeed.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				B5BF87A82BF0846A009FCE41 /* Assets.xcassets */,
 				B5BF87AA2BF0846A009FCE41 /* Preview Content */,
 				B5FC298E2BF0C7E10094A8A4 /* ViewController.swift */,
+				B5FC29912BF1194B0094A8A4 /* ImageFeed.swift */,
 			);
 			path = IWasHere;
 			sourceTree = "<group>";
@@ -148,6 +151,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5FC298F2BF0C7E10094A8A4 /* ViewController.swift in Sources */,
+				B5FC29922BF1194B0094A8A4 /* ImageFeed.swift in Sources */,
 				B5BF87A72BF08469009FCE41 /* ContentView.swift in Sources */,
 				B5BF87A52BF08469009FCE41 /* IWasHereApp.swift in Sources */,
 			);

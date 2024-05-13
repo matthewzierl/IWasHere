@@ -10,7 +10,7 @@ import SwiftUI
 import UIKit
 import AVFoundation
 
-class ViewController: UIViewController {
+class myViewController: UIViewController {
     /**
      For camera:
         - Catpure Session
@@ -119,7 +119,7 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: AVCapturePhotoCaptureDelegate {
+extension myViewController: AVCapturePhotoCaptureDelegate {
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: (any Error)?) {
         
         guard let data = photo.fileDataRepresentation() else {
