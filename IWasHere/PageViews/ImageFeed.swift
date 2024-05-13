@@ -14,7 +14,3 @@ struct ImageFeed: View {
         Text("HELLO")
     }
 }
-
-#Preview {
-    ImageFeed()
-}

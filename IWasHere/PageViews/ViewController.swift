@@ -10,7 +10,7 @@ import SwiftUI
 import UIKit
 import AVFoundation
 
-class ViewController: UIViewController {
+class myViewController: UIViewController {
     /**
      For camera:
         - Catpure Session
@@ -54,7 +54,7 @@ class ViewController: UIViewController {
         super.viewDidLayoutSubviews()
         previewLayer.frame = view.bounds
         
-        shutterButton.center = CGPoint(x: view.frame.size.width/2, y: view.frame.size.height - 120)
+        shutterButton.center = CGPoint(x: view.frame.size.width/2, y: view.frame.size.height - 110)
     }
     
     /*
@@ -78,7 +78,6 @@ class ViewController: UIViewController {
                     return
                 }
             }
-            break
         case .restricted:
             break
         case .denied:
@@ -120,7 +119,7 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: AVCapturePhotoCaptureDelegate {
+extension myViewController: AVCapturePhotoCaptureDelegate {
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: (any Error)?) {
         
         guard let data = photo.fileDataRepresentation() else {

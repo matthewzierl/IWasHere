@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B55A737E2BF1FC5200E32804 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55A737D2BF1FC5200E32804 /* PageViewController.swift */; };
+		B55A73822BF206AD00E32804 /* ContentBoard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B55A73812BF206AD00E32804 /* ContentBoard.storyboard */; };
+		B55A73842BF212F700E32804 /* GlobeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55A73832BF212F700E32804 /* GlobeView.swift */; };
 		B5BF87A52BF08469009FCE41 /* IWasHereApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF87A42BF08469009FCE41 /* IWasHereApp.swift */; };
 		B5BF87A72BF08469009FCE41 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF87A62BF08469009FCE41 /* ContentView.swift */; };
 		B5BF87A92BF0846A009FCE41 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5BF87A82BF0846A009FCE41 /* Assets.xcassets */; };
@@ -17,6 +20,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B55A737D2BF1FC5200E32804 /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
+		B55A73812BF206AD00E32804 /* ContentBoard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ContentBoard.storyboard; sourceTree = "<group>"; };
+		B55A73832BF212F700E32804 /* GlobeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobeView.swift; sourceTree = "<group>"; };
 		B5BF87A12BF08469009FCE41 /* IWasHere.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IWasHere.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5BF87A42BF08469009FCE41 /* IWasHereApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IWasHereApp.swift; sourceTree = "<group>"; };
 		B5BF87A62BF08469009FCE41 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -42,6 +48,7 @@
 		B5BF87982BF08469009FCE41 = {
 			isa = PBXGroup;
 			children = (
+				B55A73832BF212F700E32804 /* GlobeView.swift */,
 				B5BF87A32BF08469009FCE41 /* IWasHere */,
 				B5BF87A22BF08469009FCE41 /* Products */,
 			);
@@ -66,6 +73,8 @@
 				B5BF87AA2BF0846A009FCE41 /* Preview Content */,
 				B5FC298E2BF0C7E10094A8A4 /* ViewController.swift */,
 				B5FC29912BF1194B0094A8A4 /* ImageFeed.swift */,
+				B55A737D2BF1FC5200E32804 /* PageViewController.swift */,
+				B55A73812BF206AD00E32804 /* ContentBoard.storyboard */,
 			);
 			path = IWasHere;
 			sourceTree = "<group>";
@@ -138,6 +147,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5FC298D2BF0C0E40094A8A4 /* LaunchScreen.storyboard in Resources */,
+				B55A73822BF206AD00E32804 /* ContentBoard.storyboard in Resources */,
 				B5BF87AC2BF0846A009FCE41 /* Preview Assets.xcassets in Resources */,
 				B5BF87A92BF0846A009FCE41 /* Assets.xcassets in Resources */,
 			);
@@ -150,7 +160,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B55A73842BF212F700E32804 /* GlobeView.swift in Sources */,
 				B5FC298F2BF0C7E10094A8A4 /* ViewController.swift in Sources */,
+				B55A737E2BF1FC5200E32804 /* PageViewController.swift in Sources */,
 				B5FC29922BF1194B0094A8A4 /* ImageFeed.swift in Sources */,
 				B5BF87A72BF08469009FCE41 /* ContentView.swift in Sources */,
 				B5BF87A52BF08469009FCE41 /* IWasHereApp.swift in Sources */,
