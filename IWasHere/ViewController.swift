@@ -11,30 +11,44 @@ import UIKit
 import AVFoundation
 
 class ViewController: UIViewController {
-    /**
-     For camera:
-        - Catpure Session
-        - Photo Output
-        - Video Preview
-        - Shutter Button
-     */
-    
     var session: AVCaptureSession? // capture session
-    
     let output = AVCapturePhotoOutput() // photo output
+    let previewLayer = AVCaptureVideoPreviewLayer() // video preview
+    private var imageView: UIImageView? // image view for captured photo
     
-    let previewLayer = AVCaptureVideoPreviewLayer() // Video preview
-    
+    private let photoLabel: UILabel = {
+            let label = UILabel()
+            label.text = "Photo captured!"
+            label.textColor = .white
+            label.font = UIFont.systemFont(ofSize: 20)
+            label.textAlignment = .center
+            label.numberOfLines = 1
+            label.isHidden = true // Initially hidden
+            return label
+        }()
+
+
+
+    // Shutter button
     private let shutterButton: UIButton = {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
-        
-        button.layer.cornerRadius = 40
-        button.layer.borderWidth = 10
+        button.layer.cornerRadius = 20
+        button.layer.borderWidth = 6
         button.layer.borderColor = UIColor.white.cgColor
-        
         return button
     }()
     
+    // Close button
+    private let closeButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("X", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        button.layer.cornerRadius = 15
+        button.frame = CGRect(x: 20, y: 50, width: 30, height: 30)
+        button.isHidden = true // initially hidden
+        return button
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,46 +56,37 @@ class ViewController: UIViewController {
         
         view.layer.addSublayer(previewLayer)
         view.addSubview(shutterButton)
+        view.addSubview(closeButton)
+        
+        view.addSubview(photoLabel)
         
         checkCameraPermissions()
         
         shutterButton.addTarget(self, action: #selector(didTapTakePhoto), for: .touchUpInside)
-
+        closeButton.addTarget(self, action: #selector(didTapClose), for: .touchUpInside)
     }
-    
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         previewLayer.frame = view.bounds
-        
-        shutterButton.center = CGPoint(x: view.frame.size.width/2, y: view.frame.size.height - 120)
+        shutterButton.center = CGPoint(x: view.frame.size.width / 2, y: view.frame.size.height - 100)
+        photoLabel.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: 50)
+            photoLabel.center = view.center
     }
     
-    /*
-     checkCameraPermissions checks whether use allowed for camera to be used
-     
-     if authorized, calls setUpCamera()
-     */
+    // Check camera permissions
     private func checkCameraPermissions() {
         switch AVCaptureDevice.authorizationStatus(for: .video) {
-            
         case .notDetermined:
             AVCaptureDevice.requestAccess(for: .video) { [weak self] granted in
-                // "[weak self]" captures self weakly meaning it holds a 'weak' reference to the object
-                // it belongs to. if object becomes deallocated, ends up being nil (good mem management)
                 if granted {
                     DispatchQueue.main.async {
                         self?.setUpCamera()
                     }
                 }
-                else {
-                    return
-                }
             }
-            break
-        case .restricted:
-            break
-        case .denied:
+        case .restricted, .denied:
+            // Handle restricted or denied permissions
             break
         case .authorized:
             setUpCamera()
@@ -90,50 +95,102 @@ class ViewController: UIViewController {
         }
     }
     
+    // Set up the camera
     private func setUpCamera() {
-        let new_session = AVCaptureSession()
-        
+        let newSession = AVCaptureSession()
         if let device = AVCaptureDevice.default(for: .video) {
             do {
                 let input = try AVCaptureDeviceInput(device: device)
-                if new_session.canAddInput(input) {
-                    new_session.addInput(input)
+                if newSession.canAddInput(input) {
+                    newSession.addInput(input)
                 }
-                
-                if new_session.canAddOutput(output) {
-                    new_session.addOutput(output)
+                if newSession.canAddOutput(output) {
+                    newSession.addOutput(output)
                 }
-                
                 previewLayer.videoGravity = .resizeAspectFill
-                previewLayer.session = new_session
-                
-                new_session.startRunning()
-                self.session = new_session
-            }
-            catch {
+                previewLayer.session = newSession
+                DispatchQueue.global(qos: .userInitiated).async {
+                    newSession.startRunning()
+                }
+                self.session = newSession
+            } catch {
                 print(error)
             }
         }
     }
+    
+    // Capture photo
     @objc private func didTapTakePhoto() {
         output.capturePhoto(with: AVCapturePhotoSettings(), delegate: self)
     }
+    
+    // Close photo preview
+    @objc private func didTapClose() {
+        imageView?.removeFromSuperview() // Remove the image view
+        closeButton.isHidden = true // Hide the close button
+        photoLabel.isHidden = true
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.session?.startRunning() // Restart the camera session
+        }
+    }
 }
 
+// Photo capture delegate
 extension ViewController: AVCapturePhotoCaptureDelegate {
-    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: (any Error)?) {
-        
+    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
         guard let data = photo.fileDataRepresentation() else {
             return
         }
         
+        
         let image = UIImage(data: data)
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.session?.stopRunning()
+        }
         
-        session?.stopRunning()
+        DispatchQueue.main.async {
+            self.imageView = UIImageView(image: image)
+            self.imageView?.contentMode = .scaleAspectFill
+            self.imageView?.frame = self.view.bounds
+            if let imageView = self.imageView { // Checking if not nil
+                self.view.addSubview(imageView)
+                
+                self.view.bringSubviewToFront(self.closeButton)
+                self.view.bringSubviewToFront(self.photoLabel)
+                self.photoLabel.isHidden = false
+                self.closeButton.isHidden = false // Show the close button
+                
+            }
+        }
         
-        let imageView = UIImageView(image: image)
-        imageView.contentMode = .scaleAspectFill
-        imageView.frame = view.bounds
-        view.addSubview(imageView)
+    }
+}
+
+/*
+ Conforms UIKit view to SwiftUI view
+ */
+struct CameraView: UIViewControllerRepresentable {
+    
+    typealias UIViewControllerType = UIViewController
+    
+    /*
+     Create view controller object
+     Configure it's initial state
+     
+     return: instance of ViewController
+     */
+    func makeUIViewController(context: Context) -> UIViewController {
+        let vc = ViewController()
+        // configurations (if needed) here
+        
+        return vc
+    }
+    
+    /*
+     Called when there is an update from SwiftUI
+     
+     */
+    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
+        return
     }
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AE86F2FA79A7D913817513FE /* Pods_IWasHere.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EA87249566B0CDF1ED77EF6 /* Pods_IWasHere.framework */; };
 		B55A737E2BF1FC5200E32804 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55A737D2BF1FC5200E32804 /* PageViewController.swift */; };
 		B55A73822BF206AD00E32804 /* ContentBoard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B55A73812BF206AD00E32804 /* ContentBoard.storyboard */; };
 		B55A73842BF212F700E32804 /* GlobeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55A73832BF212F700E32804 /* GlobeView.swift */; };
@@ -20,6 +21,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1EA87249566B0CDF1ED77EF6 /* Pods_IWasHere.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IWasHere.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A520869C6C0485CC4692E914 /* Pods-IWasHere.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IWasHere.debug.xcconfig"; path = "Target Support Files/Pods-IWasHere/Pods-IWasHere.debug.xcconfig"; sourceTree = "<group>"; };
+		A53557D888DB858C3671230A /* Pods-IWasHere.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IWasHere.release.xcconfig"; path = "Target Support Files/Pods-IWasHere/Pods-IWasHere.release.xcconfig"; sourceTree = "<group>"; };
 		B55A737D2BF1FC5200E32804 /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		B55A73812BF206AD00E32804 /* ContentBoard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ContentBoard.storyboard; sourceTree = "<group>"; };
 		B55A73832BF212F700E32804 /* GlobeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobeView.swift; sourceTree = "<group>"; };
@@ -39,18 +43,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE86F2FA79A7D913817513FE /* Pods_IWasHere.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6E3ECA0B10572712B96A030B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A520869C6C0485CC4692E914 /* Pods-IWasHere.debug.xcconfig */,
+				A53557D888DB858C3671230A /* Pods-IWasHere.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		96A6D6900FF44DCE4477D144 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1EA87249566B0CDF1ED77EF6 /* Pods_IWasHere.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		B5BF87982BF08469009FCE41 = {
 			isa = PBXGroup;
 			children = (
 				B55A73832BF212F700E32804 /* GlobeView.swift */,
 				B5BF87A32BF08469009FCE41 /* IWasHere */,
 				B5BF87A22BF08469009FCE41 /* Products */,
+				6E3ECA0B10572712B96A030B /* Pods */,
+				96A6D6900FF44DCE4477D144 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -94,9 +118,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B5BF87C52BF0846A009FCE41 /* Build configuration list for PBXNativeTarget "IWasHere" */;
 			buildPhases = (
+				7ECA30E157FFC3D97A2E1A16 /* [CP] Check Pods Manifest.lock */,
 				B5BF879D2BF08469009FCE41 /* Sources */,
 				B5BF879E2BF08469009FCE41 /* Frameworks */,
 				B5BF879F2BF08469009FCE41 /* Resources */,
+				4434AECC7F03DBA4449F9701 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -154,6 +180,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4434AECC7F03DBA4449F9701 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-IWasHere/Pods-IWasHere-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-IWasHere/Pods-IWasHere-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-IWasHere/Pods-IWasHere-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7ECA30E157FFC3D97A2E1A16 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-IWasHere-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B5BF879D2BF08469009FCE41 /* Sources */ = {
@@ -293,6 +361,7 @@
 		};
 		B5BF87C62BF0846A009FCE41 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A520869C6C0485CC4692E914 /* Pods-IWasHere.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -301,6 +370,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"IWasHere/Preview Content\"";
 				DEVELOPMENT_TEAM = AL6U4A6MAQ;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = IWasHere/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = IWasHere;
@@ -327,6 +397,7 @@
 		};
 		B5BF87C72BF0846A009FCE41 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A53557D888DB858C3671230A /* Pods-IWasHere.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -335,6 +406,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"IWasHere/Preview Content\"";
 				DEVELOPMENT_TEAM = AL6U4A6MAQ;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = IWasHere/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = IWasHere;

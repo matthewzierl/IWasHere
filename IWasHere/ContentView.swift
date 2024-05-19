@@ -6,53 +6,8 @@
 //
 
 import SwiftUI
-
-/*
- Conforms UIKit view to SwiftUI view
- */
-struct CameraView: UIViewControllerRepresentable {
-    
-    typealias UIViewControllerType = UIViewController
-    
-//    let views: [UIViewController] // array of UIViewController types to display with ViewController
-    
-    /*
-     Create view controller object
-     Configure it's initial state
-     
-     return: instance of ViewController
-     */
-    func makeUIViewController(context: Context) -> UIViewController {
-        let vc = ViewController()
-        // configurations (if needed) here
-        
-        return vc
-    }
-    
-    /*
-     Called when there is an update from SwiftUI
-     
-     */
-    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
-        return
-    }
-}
-
-struct GlobeViewRepresentable: UIViewControllerRepresentable {
-    func makeUIViewController(context: Context) -> UIViewController {
-        let vc = GlobeView()
-        
-        return vc
-    }
-    
-    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
-        return
-    }
-    
-    typealias UIViewControllerType = UIViewController
-    
-    
-}
+import UIKit
+import GoogleMaps
 
 struct ContentView: View {
     
@@ -102,5 +57,6 @@ struct ContentView: View {
 //
 //#Preview {
 ////    ContentView()
-//    ViewController()
+////    ImageFeed()
+////    GlobeViewRepresentable()
 //}
