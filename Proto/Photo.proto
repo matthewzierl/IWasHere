@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+message Photo {
+    string image_url = 1;
+    double latitude = 2;
+    double longitude = 3;
+    string notes = 4;
+    int64 timestamp = 5;
+}

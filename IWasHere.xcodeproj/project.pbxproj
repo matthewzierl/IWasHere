@@ -11,6 +11,9 @@
 		B55A737E2BF1FC5200E32804 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55A737D2BF1FC5200E32804 /* PageViewController.swift */; };
 		B55A73822BF206AD00E32804 /* ContentBoard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B55A73812BF206AD00E32804 /* ContentBoard.storyboard */; };
 		B55A73842BF212F700E32804 /* GlobeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55A73832BF212F700E32804 /* GlobeView.swift */; };
+		B56FFE9D2BFB07F3002DDD3E /* Photo.proto in Sources */ = {isa = PBXBuildFile; fileRef = B56FFE9A2BFB07F3002DDD3E /* Photo.proto */; };
+		B56FFE9F2BFB2A18002DDD3E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B56FFE9E2BFB2A18002DDD3E /* GoogleService-Info.plist */; };
+		B56FFEA12BFB496D002DDD3E /* Photo.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56FFEA02BFB496D002DDD3E /* Photo.pb.swift */; };
 		B5BF87A52BF08469009FCE41 /* IWasHereApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF87A42BF08469009FCE41 /* IWasHereApp.swift */; };
 		B5BF87A72BF08469009FCE41 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF87A62BF08469009FCE41 /* ContentView.swift */; };
 		B5BF87A92BF0846A009FCE41 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5BF87A82BF0846A009FCE41 /* Assets.xcassets */; };
@@ -27,6 +30,9 @@
 		B55A737D2BF1FC5200E32804 /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		B55A73812BF206AD00E32804 /* ContentBoard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ContentBoard.storyboard; sourceTree = "<group>"; };
 		B55A73832BF212F700E32804 /* GlobeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobeView.swift; sourceTree = "<group>"; };
+		B56FFE9A2BFB07F3002DDD3E /* Photo.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; path = Photo.proto; sourceTree = "<group>"; };
+		B56FFE9E2BFB2A18002DDD3E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B56FFEA02BFB496D002DDD3E /* Photo.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.pb.swift; sourceTree = "<group>"; };
 		B5BF87A12BF08469009FCE41 /* IWasHere.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IWasHere.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5BF87A42BF08469009FCE41 /* IWasHereApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IWasHereApp.swift; sourceTree = "<group>"; };
 		B5BF87A62BF08469009FCE41 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -67,10 +73,20 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B56FFE9B2BFB07F3002DDD3E /* Proto */ = {
+			isa = PBXGroup;
+			children = (
+				B56FFE9A2BFB07F3002DDD3E /* Photo.proto */,
+				B56FFEA02BFB496D002DDD3E /* Photo.pb.swift */,
+			);
+			path = Proto;
+			sourceTree = "<group>";
+		};
 		B5BF87982BF08469009FCE41 = {
 			isa = PBXGroup;
 			children = (
-				B55A73832BF212F700E32804 /* GlobeView.swift */,
+				B56FFE9E2BFB2A18002DDD3E /* GoogleService-Info.plist */,
+				B56FFE9B2BFB07F3002DDD3E /* Proto */,
 				B5BF87A32BF08469009FCE41 /* IWasHere */,
 				B5BF87A22BF08469009FCE41 /* Products */,
 				6E3ECA0B10572712B96A030B /* Pods */,
@@ -89,6 +105,7 @@
 		B5BF87A32BF08469009FCE41 /* IWasHere */ = {
 			isa = PBXGroup;
 			children = (
+				B55A73832BF212F700E32804 /* GlobeView.swift */,
 				B5FC29902BF0C9750094A8A4 /* Info.plist */,
 				B5FC298C2BF0C0E40094A8A4 /* LaunchScreen.storyboard */,
 				B5BF87A42BF08469009FCE41 /* IWasHereApp.swift */,
@@ -123,6 +140,7 @@
 				B5BF879E2BF08469009FCE41 /* Frameworks */,
 				B5BF879F2BF08469009FCE41 /* Resources */,
 				4434AECC7F03DBA4449F9701 /* [CP] Copy Pods Resources */,
+				9CC00D82D2828C8DB3A03D78 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -174,6 +192,7 @@
 			files = (
 				B5FC298D2BF0C0E40094A8A4 /* LaunchScreen.storyboard in Resources */,
 				B55A73822BF206AD00E32804 /* ContentBoard.storyboard in Resources */,
+				B56FFE9F2BFB2A18002DDD3E /* GoogleService-Info.plist in Resources */,
 				B5BF87AC2BF0846A009FCE41 /* Preview Assets.xcassets in Resources */,
 				B5BF87A92BF0846A009FCE41 /* Assets.xcassets in Resources */,
 			);
@@ -221,6 +240,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		9CC00D82D2828C8DB3A03D78 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-IWasHere/Pods-IWasHere-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-IWasHere/Pods-IWasHere-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-IWasHere/Pods-IWasHere-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -231,9 +267,11 @@
 				B55A73842BF212F700E32804 /* GlobeView.swift in Sources */,
 				B5FC298F2BF0C7E10094A8A4 /* ViewController.swift in Sources */,
 				B55A737E2BF1FC5200E32804 /* PageViewController.swift in Sources */,
+				B56FFEA12BFB496D002DDD3E /* Photo.pb.swift in Sources */,
 				B5FC29922BF1194B0094A8A4 /* ImageFeed.swift in Sources */,
 				B5BF87A72BF08469009FCE41 /* ContentView.swift in Sources */,
 				B5BF87A52BF08469009FCE41 /* IWasHereApp.swift in Sources */,
+				B56FFE9D2BFB07F3002DDD3E /* Photo.proto in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

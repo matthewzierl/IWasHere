@@ -11,27 +11,29 @@ import GoogleMaps
 
 struct ContentView: View {
     
+    @State private var isMapExpanded = false
+    
     var body: some View {
         // Use TabView to switch between CameraView and GlobeViewRepresentable
-                TabView {
-                    // CameraView
-                    CameraView()
-                        .tabItem {
-                            Label("Camera", systemImage: "camera")
-                        }
-                        .tag(0) // Assign a tag for identification
-                    
-                    // GlobeViewRepresentable
-                    GlobeViewRepresentable()
-                        .tabItem {
-                            Label("Globe", systemImage: "globe")
-                        }
-                        .tag(1) // Assign a tag for identification
+        TabView {
+            // CameraView
+            CameraView()
+                .tabItem {
+                    Label("Camera", systemImage: "camera")
                 }
-                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never)) // Hide tab bar
-                .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always)) // Show page indicator
-            }
+                .tag(0) // Assign a tag for identification
+            
+            // GlobeViewRepresentable
+            GlobeViewRepresentable()
+                .tabItem {
+                    Label("Globe", systemImage: "globe")
+                }
+                .tag(1) // Assign a tag for identification
+        }
+        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never)) // Hide tab bar
+        .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always)) // Show page indicator
     }
+}
 
 
 

@@ -7,6 +7,9 @@
 
 import SwiftUI
 import GoogleMaps
+import FirebaseCore
+import FirebaseFirestore
+import FirebaseAuth
 
 @main // start of app
 struct IWasHereApp: App {
@@ -35,6 +38,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         
         // Provide the Google Maps API key
         GMSServices.provideAPIKey("AIzaSyBYGT2GlbBNKFCkgszCAQNr5RsNvhS4dQo")
+        
+        // Use Firebase library to configure APIs
+        FirebaseApp.configure()
         
         return true
     }
