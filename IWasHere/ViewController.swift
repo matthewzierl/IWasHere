@@ -13,6 +13,7 @@ import CoreLocation
 import SwiftProtobuf
 import FirebaseFirestore
 import FirebaseStorage
+import FirebaseAuth
 
 class ViewController: UIViewController, CLLocationManagerDelegate {
     var session: AVCaptureSession? // capture session
@@ -96,14 +97,53 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         photoLabel.center = view.center
     }
     
+    private func checkLocationPermissions() {
+        switch locationManager.authorizationStatus {
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+        case .restricted, .denied:
+            showLocationAccessDeniedAlert()
+        case .authorizedAlways, .authorizedWhenInUse:
+            setupLocationManager()
+        @unknown default:
+            break
+            
+        }
+    }
+    
+    // CLLocationManagerDelegate method to handle authorization status changes
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .notDetermined:
+            // Request permission if it's not determined
+            locationManager.requestWhenInUseAuthorization()
+        case .restricted, .denied:
+            // Handle restricted or denied permissions
+            showLocationAccessDeniedAlert()
+        case .authorizedAlways, .authorizedWhenInUse:
+            // Continue normally
+            setupLocationManager()
+        @unknown default:
+            break
+        }
+    }
+    
     private func setupLocationManager() {
         locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.startUpdatingLocation()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         currentLocation = locations.first
+    }
+    
+    private func showLocationAccessDeniedAlert() {
+        let alert = UIAlertController(title: "Location Access Denied",
+                                      message: "Please enable location services in Settings.",
+                                      preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
     // Check camera permissions
@@ -151,37 +191,47 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
-    private func savePhotoMetadata(_ data: Data) {
+    private func savePhotoMetadata(_ data: Data) async {
+//        guard let user = Auth.auth().currentUser else {
+//            print("User is not authenticated")
+//            return
+//        }
+        
         let db = Firestore.firestore()
         let photoCollection = db.collection("photos")
         
-        photoCollection.addDocument(data: ["metadata": data]) { error in
-            if let error = error {
-                print("Error adding document: \(error)")
-            } else {
-                print("Document added successfully")
-            }
+        // Convert the Data to a base64 encoded string
+        let base64String = data.base64EncodedString()
+        
+        // Create the dictionary to be stored in Firestore
+        let metadataDict: [String: Any] = ["metadata": base64String]
+        
+        do {
+            let ref = try await photoCollection.addDocument(data: metadataDict)
+            print("Document added successfully with ID: \(ref.documentID)")
+        } catch {
+            print("Error adding document: \(error.localizedDescription)")
         }
     }
+
+
+
     
-    private func uploadImageToFirebase(_ imageData: Data, completion: @escaping (URL?) -> Void) {
+    private func uploadImageToFirebase(_ imageData: Data) async throws -> URL? {
         let storageRef = Storage.storage().reference().child("images/\(UUID().uuidString).jpg")
-        storageRef.putData(imageData, metadata: nil) { metadata, error in
-            if let error = error {
-                print("Error uploading image: \(error)")
-                completion(nil)
-            } else {
-                storageRef.downloadURL { url, error in
-                    if let error = error {
-                        print("Error getting download URL: \(error)")
-                        completion(nil)
-                    } else {
-                        completion(url)
-                    }
-                }
-            }
+        let metadata = StorageMetadata()
+        metadata.contentType = "image/jpeg"
+
+        do {
+            _ = try await storageRef.putDataAsync(imageData, metadata: metadata)
+            let url = try await storageRef.downloadURL()
+            return url
+        } catch {
+            print("Error uploading image: \(error)")
+            throw error
         }
     }
+
     
     // Capture photo
     @objc private func didTapTakePhoto() {
@@ -204,34 +254,32 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             return
         }
 
-        uploadImageToFirebase(imageData) { [weak self] url in
-            guard let self = self, let url = url else {
-                return
-            }
-            
-            // Serialize the photo metadata
-            if let location = self.currentLocation {
-                let photoMetadata = Photo.with {
-                    $0.latitude = location.coordinate.latitude
-                    $0.longitude = location.coordinate.longitude
-                    $0.timestamp = Int64(Date().timeIntervalSince1970)
-                    $0.imageURL = url.absoluteString
-                    $0.notes = "" // Add user notes if applicable
-                }
+        // Switch back to camera mode immediately
+        self.uploadButton.isHidden = true
+        self.didTapClose()
 
-                do {
-                    let serializedData = try photoMetadata.serializedData()
-                    // Save `serializedData` to Firestore
-                    self.savePhotoMetadata(serializedData)
-                } catch {
-                    print("Failed to serialize photo metadata: \(error)")
+        // Run the upload process in the background
+        Task {
+            do {
+                if let url = try await uploadImageToFirebase(imageData) {
+                    if let location = currentLocation {
+                        let photoMetadata = Photo.with {
+                            $0.latitude = location.coordinate.latitude
+                            $0.longitude = location.coordinate.longitude
+                            $0.timestamp = Int64(Date().timeIntervalSince1970)
+                            $0.imageURL = url.absoluteString
+                            $0.notes = "" // Add user notes if applicable
+                        }
+                        let serializedData = try photoMetadata.serializedData()
+                        await savePhotoMetadata(serializedData)
+                    }
                 }
+            } catch {
+                print("Failed to upload image or save metadata: \(error)")
             }
-            
-            self.uploadButton.isHidden = true
-            self.didTapClose()
         }
     }
+
 }
 
 // Photo capture delegate
@@ -259,6 +307,32 @@ extension ViewController: AVCapturePhotoCaptureDelegate {
                 self.photoLabel.isHidden = false
                 self.closeButton.isHidden = false // Show the close button
                 self.uploadButton.isHidden = false
+            }
+        }
+    }
+}
+
+extension StorageReference {
+    func putDataAsync(_ uploadData: Data, metadata: StorageMetadata?) async throws -> StorageMetadata {
+        return try await withCheckedThrowingContinuation { continuation in
+            putData(uploadData, metadata: metadata) { metadata, error in
+                if let error = error {
+                    continuation.resume(throwing: error)
+                } else if let metadata = metadata {
+                    continuation.resume(returning: metadata)
+                }
+            }
+        }
+    }
+    
+    func downloadURL() async throws -> URL {
+        return try await withCheckedThrowingContinuation { continuation in
+            downloadURL { url, error in
+                if let error = error {
+                    continuation.resume(throwing: error)
+                } else if let url = url {
+                    continuation.resume(returning: url)
+                }
             }
         }
     }

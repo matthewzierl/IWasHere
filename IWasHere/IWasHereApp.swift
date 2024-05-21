@@ -41,6 +41,18 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         
         // Use Firebase library to configure APIs
         FirebaseApp.configure()
+        FirebaseConfiguration.shared.setLoggerLevel(.debug)
+        
+        // Authenticate user anonymously
+//        Auth.auth().signInAnonymously { authResult, error in
+//            if let error = error {
+//                print("in IWasHereAPP")
+//                print("Authentication error: \(error.localizedDescription)")
+//            } else {
+//                print("User signed in: \(String(describing: authResult?.user.uid))")
+//            }
+//        }
+
         
         return true
     }
