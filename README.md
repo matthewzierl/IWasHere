@@ -1,8 +1,8 @@
-IWasHere
+**IWasHere**
 
 IWasHere is an iOS application designed to capture and share photos with embedded geolocation data. The app allows users to document their travels by taking pictures that are automatically tagged with their current location. Users can view their photos on an interactive globe map and share their experiences with friends.
 
-Features
+**Features**
 
 Custom Camera Interface: Capture high-quality photos using AVFoundation.
 Real-Time Geolocation: Embed geolocation data into photos using CoreLocation.
@@ -11,53 +11,26 @@ Metadata Serialization: Efficiently manage photo metadata using Protocol Buffers
 Interactive Map: View photos on an interactive globe map using the Maps SDK.
 Asynchronous Data Handling: Utilize the Combine framework for smooth and efficient data uploading and downloading.
 
-Technologies Used
+**Technologies Used**
 
-Swift: Programming language used for development.
-SwiftUI: Framework for building the user interface.
-UIKit: Framework for managing the app’s interface.
-Combine: Framework for handling asynchronous operations.
-AVFoundation: Framework for working with audiovisual media.
-CoreLocation: Framework for obtaining the user’s location.
-Firebase Firestore: NoSQL cloud database for storing photo metadata.
-Firebase Storage: Cloud storage for storing photos.
-SwiftProtobuf: Library for Protocol Buffers support in Swift.
-Maps SDK: SDK for integrating interactive maps.
+**Swift**: Programming language used for development.
+**SwiftUI**: Framework for building the user interface.
+**UIKit**: Framework for managing the app’s interface.
+**Combine**: Framework for handling asynchronous operations.
+**AVFoundation**: Framework for working with audiovisual media.
+**CoreLocation**: Framework for obtaining the user’s location.
+**Firebase Firestore**: NoSQL cloud database for storing photo metadata.
+**Firebase Storag**e: Cloud storage for storing photos.
+**SwiftProtobuf**: Library for Protocol Buffers support in Swift.
+**Maps SDK**: SDK for integrating interactive maps.
 
-1) Clone the Repository:
-
-git clone https://github.com/matthewzierl/IWasHere.git
-cd IWasHere
-
-sudo gem install cocoapods
-
-2) Install Dependencies:
-
-Ensure you have CocoaPods installed. If not, install it by running:
-
-sudo gem install cocoapods
-
-Then, install the project dependencies:
-
-pod install
-
-3) Open the Project:
-
-Open the .xcworkspace file in Xcode:
-
-open IWasHere.xcworkspace
-
-4) Build and Run:
-
-Open Xcode, select your target device or simulator, and hit the run button.
-
-Usage
+**Usage**
 
 Capture a Photo: Launch the app, and the camera interface will appear. Press the shutter button to take a photo.
 View and Upload: After capturing a photo, preview it. Add notes and upload the photo to Firebase.
 View on Map: Swipe right to access the interactive globe map and view photos with their geolocation tags.
 
-Contact
+**Contact**
 
 For any inquiries or issues, please open an issue on GitHub or contact the project maintainer:
 
