@@ -14,14 +14,23 @@ Asynchronous Data Handling: Utilize the Combine framework for smooth and efficie
 **Technologies Used**
 
 **Swift**: Programming language used for development.
+
 **SwiftUI**: Framework for building the user interface.
+
 **UIKit**: Framework for managing the app’s interface.
+
 **Combine**: Framework for handling asynchronous operations.
+
 **AVFoundation**: Framework for working with audiovisual media.
+
 **CoreLocation**: Framework for obtaining the user’s location.
+
 **Firebase Firestore**: NoSQL cloud database for storing photo metadata.
+
 **Firebase Storag**e: Cloud storage for storing photos.
+
 **SwiftProtobuf**: Library for Protocol Buffers support in Swift.
+
 **Maps SDK**: SDK for integrating interactive maps.
 
 **Usage**
